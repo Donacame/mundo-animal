@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: mundo-animal
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile
