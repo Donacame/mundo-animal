@@ -1,15 +1,16 @@
 <?php
-// Lee la variable interna de Render
 $database_url = getenv("DATABASE_URL"); 
 
 if ($database_url) {
-    // Configuración para el servidor de Render (PostgreSQL)
+    // Configuración para Render (PostgreSQL)
     $dbopts = parse_url($database_url);
-    $host = $dbopts["host"];
-    $port = $dbopts["port"];
-    $user = $dbopts["user"];
-    $pass = $dbopts["pass"];
-    $dbname = ltrim($dbopts["path"], '/');
+    
+    $host = $dbopts["host"] ?? null;
+    // Si Render no da puerto explícito, PostgreSQL usa el 5432 por defecto
+    $port = $dbopts["port"] ?? 5432; 
+    $user = $dbopts["user"] ?? null;
+    $pass = $dbopts["pass"] ?? null;
+    $dbname = isset($dbopts["path"]) ? ltrim($dbopts["path"], '/') : null;
     
     try {
         $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $user, $pass);
@@ -18,7 +19,7 @@ if ($database_url) {
         die("Error de conexión en producción: " . $e->getMessage());
     }
 } else {
-    // Configuración en PC (XAMPP / Laragon con MySQ)
+    // Configuración local XAMPP/Laragon (MySQL)
     try {
         $pdo = new PDO("mysql:host=localhost;dbname=mascotas_db", "root", "");
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
