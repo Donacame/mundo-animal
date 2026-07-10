@@ -1,8 +1,17 @@
 <?php
 include("conexion.php");
 
-$sql = "SELECT * FROM animales";
-$resultado = $conexion->query($sql);
+try {
+    // 1. Consulta limpia y compatible con PDO para Render
+    $sql = "SELECT * FROM animales ORDER BY id DESC";
+    $stmt = $conexion->prepare($sql);
+    $stmt->execute();
+    
+    // 2. Guardamos todos los animales en la variable $filas
+    $filas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Error al consultar la base de datos: " . $e->getMessage());
+}
 ?>
 
 <!DOCTYPE html>
@@ -54,18 +63,19 @@ $resultado = $conexion->query($sql);
             </tr>
 
             <?php
+            // 3. Revisamos si hay datos guardados en $filas
             if (count($filas) > 0) {
-                while ($fila = $resultado->fetch_assoc()) {
+                foreach ($filas as $fila) {
                     echo "<tr>";
-                    echo "<td>".$fila['id']."</td>";
-                    echo "<td>".$fila['nombre_animal']."</td>";
-                    echo "<td>".$fila['tipo']."</td>";
-                    echo "<td>".$fila['edad']."</td>";
-                    echo "<td>".$fila['color']."</td>";
-                    echo "<td>".$fila['nombre_dueno']."</td>";
-                    echo "<td>".$fila['telefono']."</td>";
-                    echo "<td>".$fila['correo']."</td>";
-                    echo "<td>".$fila['direccion']."</td>";
+                    echo "<td>".htmlspecialchars($fila['id'])."</td>";
+                    echo "<td>".htmlspecialchars($fila['nombre_animal'])."</td>";
+                    echo "<td>".htmlspecialchars($fila['tipo'])."</td>";
+                    echo "<td>".htmlspecialchars($fila['edad'])."</td>";
+                    echo "<td>".htmlspecialchars($fila['color'])."</td>";
+                    echo "<td>".htmlspecialchars($fila['nombre_dueno'])."</td>";
+                    echo "<td>".htmlspecialchars($fila['telefono'])."</td>";
+                    echo "<td>".htmlspecialchars($fila['correo'])."</td>";
+                    echo "<td>".htmlspecialchars($fila['direccion'])."</td>";
                     echo "</tr>";
                 }
             } else {
