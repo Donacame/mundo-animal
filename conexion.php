@@ -1,16 +1,29 @@
 <?php
-$host = getenv('DB_HOST');
-$port = getenv('DB_PORT');
-$user = getenv('DB_USER');
-$pass = getenv('DB_PASS');
-$db   = getenv('DB_NAME');
+// Lee la variable interna de Render
+$database_url = getenv("DATABASE_URL"); 
 
-$conn = pg_connect("host=$host port=$port dbname=$db user=$user password=$pass");
-
-if (!$conn) {
-    die("Error de conexión: " . pg_last_error());
+if ($database_url) {
+    // Configuración para el servidor de Render (PostgreSQL)
+    $dbopts = parse_url($database_url);
+    $host = $dbopts["host"];
+    $port = $dbopts["port"];
+    $user = $dbopts["user"];
+    $pass = $dbopts["pass"];
+    $dbname = ltrim($dbopts["path"], '/');
+    
+    try {
+        $pdo = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $user, $pass);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        die("Error de conexión en producción: " . $e->getMessage());
+    }
+} else {
+    // Configuración en PC (XAMPP / Laragon con MySQ)
+    try {
+        $pdo = new PDO("mysql:host=localhost;dbname=mascotas_db", "root", "");
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        die("Error de conexión local: " . $e->getMessage());
+    }
 }
-
-// Asegurar UTF-8 para acentos y ñ
-$conexion->set_charset("utf8");
 ?>
