@@ -3,11 +3,11 @@ include("conexion.php");
 
 // Inicializamos la variable de filas para que no de error si no se busca nada
 $filas = [];
-$busqueda = $_GET['busqueda'] ?? ''; // Cambia 'busqueda' por el nombre de tu input de buscar si es diferente
+$busqueda = $_GET['busqueda'] ?? ''; // Cambia 'busqueda' por el nombre de input de buscar si es diferente
 
 if (!empty($busqueda)) {
     try {
-        // Corrección de la columna a 'tipo_otro' y uso de marcadores seguros con PDO
+        // Uso de marcadores seguros con PDO
         $sql = "SELECT * FROM animales WHERE 
                 nombre_animal ILIKE ? OR 
                 tipo ILIKE ? OR 
@@ -20,7 +20,7 @@ if (!empty($busqueda)) {
         // El término de búsqueda con los porcentajes para el operador LIKE
         $termino = "%" . $busqueda . "%";
         
-        // Ejecutamos la consulta pasando el término para cada columna de forma segura
+        // Ejecuta la consulta pasando el término para cada columna de forma segura
         $stmt->execute([$termino, $termino, $termino, $termino, $termino]);
         $filas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
