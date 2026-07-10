@@ -1,10 +1,14 @@
+# Usa la imagen oficial de PHP con Apache incorporado
 FROM php:8.2-apache
 
-# Copia todo tu proyecto al servidor Apache
-COPY . /var/www/html/
+# Establece el directorio de trabajo dentro del servidor
+WORKDIR /var/www/html
 
-# Habilita extensiones necesarias (si usas MySQL)
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+# Copia todos los archivos del proyecto al servidor
+COPY . .
 
-# Expone el puerto 80
+# Expone el puerto 80 para recibir las visitas de internet
 EXPOSE 80
+
+# Inicia el servidor Apache en primer plano
+CMD ["apache2-foreground"]
