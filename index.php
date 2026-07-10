@@ -37,7 +37,7 @@
 
         <!-- Tarjeta 1 -->
         <div class="tarjeta">
-            <img src="../MUNDOANIMAL/imagenes/MONARCA.jpg" alt="Insectos">
+            <img src="../imagenes/MONARCA.jpg" alt="Insectos">
             <h3>Insectos</h3>
             <p>Pequeños, diversos y sorprendentes.</p>
             <a href="html/insectos.html" class="btn-ver">Ver más</a>
@@ -45,7 +45,7 @@
 
         <!-- Tarjeta 2 -->
         <div class="tarjeta">
-            <img src="../MUNDOANIMAL/imagenes/ZAZUL.avif" alt="Animales de granja">
+            <img src="../imagenes/ZAZUL.avif" alt="Animales de granja">
             <h3>Animales de Granja</h3>
             <p>Caballos, vacas, ovejas y más.</p>
             <a href="html/granja.html" class="btn-ver">Ver más</a>
@@ -53,7 +53,7 @@
 
         <!-- Tarjeta 3 -->
         <div class="tarjeta">
-            <img src="../MUNDOANIMAL/imagenes/LINCE.avif" alt="Exóticos">
+            <img src="../imagenes/LINCE.avif" alt="Exóticos">
             <h3>Animales Exóticos</h3>
             <p>Raros, únicos y fascinantes.</p>
             <a href="html/exoticos.html" class="btn-ver">Ver más</a>
@@ -61,7 +61,7 @@
 
         <!-- Tarjeta 4 -->
         <div class="tarjeta">
-            <img src="../MUNDOANIMAL/imagenes/ARDILLA LISTADA.jpg" alt="Roedores">
+            <img src="../imagenes/ARDILLA LISTADA.jpg" alt="Roedores">
             <h3>Roedores</h3>
             <p>Pequeños, ágiles y curiosos.</p>
             <a href="html/roedores.html" class="btn-ver">Ver más</a>
