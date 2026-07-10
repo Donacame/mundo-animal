@@ -36,7 +36,7 @@ if (isset($_GET['buscar'])) {
     <header class="navbar">
         <div class="logo">🐾Mundo Animal🐾</div>
         <nav>
-            <a href="../index.html">Inicio</a>
+            <a href="../index.php">Inicio</a>
             <a href="../html/perros.html">Perros</a>
             <a href="../html/gatos.html">Gatos</a>
             <a href="../html/aves.html">Aves</a>
