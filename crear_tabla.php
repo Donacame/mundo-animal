@@ -2,7 +2,7 @@
 include 'conexion.php'; 
 
 try {
-    $sql = "CREATE TABLE IF NOT EXISTS registros_animales (
+    $sql = "CREATE TABLE IF NOT EXISTS animales (
         id SERIAL PRIMARY KEY,
         animal_nombre VARCHAR(100) NOT NULL,
         animal_tipo VARCHAR(50) NOT NULL,
@@ -18,7 +18,7 @@ try {
     // Ahora usa $conexion
     $conexion->exec($sql);
     echo "<h1>¡Éxito!</h1>";
-    echo "<p>La tabla <b>registros_animales</b> se ha creado correctamente en Render.</p>";
+    echo "<p>La tabla <b>animales</b> se ha creado correctamente en Render.</p>";
 } catch (PDOException $e) {
     echo "<h1>Error</h1>";
     echo "<p>No se pudo crear la tabla: " . $e->getMessage() . "</p>";
