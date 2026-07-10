@@ -1,25 +1,35 @@
 <?php
 include("conexion.php");
 
-$busqueda = "";
-$resultado = null;
+// Inicializamos la variable de filas para que no de error si no se busca nada
+$filas = [];
+$busqueda = $_GET['busqueda'] ?? ''; // Cambia 'busqueda' por el nombre de tu input de buscar si es diferente
 
-if (isset($_GET['buscar'])) {
-    $busqueda = $_GET['buscar'];
-
-    $sql = "SELECT * FROM animales 
-            WHERE nombre_animal LIKE '%$busqueda%' 
-            OR tipo LIKE '%$busqueda%'
-            OR otro_tipo LIKE '%$busqueda%'
-            OR color LIKE '%$busqueda%'
-            OR nombre_dueno LIKE '%$busqueda%'
-            OR telefono LIKE '%$busqueda%'
-            OR correo LIKE '%$busqueda%'
-            OR direccion LIKE '%$busqueda%'";
-
-    $resultado = $conexion->query($sql);
+if (!empty($busqueda)) {
+    try {
+        // Corrección de la columna a 'tipo_otro' y uso de marcadores seguros con PDO
+        $sql = "SELECT * FROM animales WHERE 
+                nombre_animal ILIKE ? OR 
+                tipo ILIKE ? OR 
+                tipo_otro ILIKE ? OR 
+                color ILIKE ? OR 
+                nombre_dueno ILIKE ?";
+        
+        $stmt = $conexion->prepare($sql);
+        
+        // El término de búsqueda con los porcentajes para el operador LIKE
+        $termino = "%" . $busqueda . "%";
+        
+        // Ejecutamos la consulta pasando el término para cada columna de forma segura
+        $stmt->execute([$termino, $termino, $termino, $termino, $termino]);
+        $filas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+    } catch (PDOException $e) {
+        die("Error al buscar en la base de datos: " . $e->getMessage());
+    }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,7 +38,7 @@ if (isset($_GET['buscar'])) {
     <title>Buscar Animales - Mundo Animal</title>
     <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body class="buscar">
+<body class="ver">
 
     <div class="fondo-bosque"></div>
 
@@ -50,18 +60,18 @@ if (isset($_GET['buscar'])) {
     <!-- Título -->
     <section class="inicio-contenido">
         <h1 class="titulo-principal">Buscar Animales</h1>
-        <p class="subtitulo">Encuentra animales por nombre, tipo o dueño</p>
+        <p class="subtitulo">Encuentra registros por nombre, tipo, color o dueño</p>
     </section>
 
-    <!-- Buscador -->
-    <section class="buscar-contenedor">
-        <form method="GET">
-            <input type="text" name="buscar" placeholder="Escribe algo..." value="<?php echo $busqueda; ?>" required>
-            <button type="submit">Buscar</button>
+    <!-- Formulario de Búsqueda -->
+    <section class="tabla-contenedor" style="margin-bottom: 20px; text-align: center;">
+        <form action="buscar.php" method="GET">
+            <input type="text" name="busqueda" value="<?php echo htmlspecialchars($busqueda); ?>" placeholder="Escribe para buscar..." style="padding: 10px; width: 60%; border-radius: 5px; border: 1px solid #ccc;">
+            <button type="submit" style="padding: 10px 20px; background-color: #2e7d32; color: white; border: none; border-radius: 5px; cursor: pointer;">Buscar</button>
         </form>
     </section>
 
-    <!-- Resultados -->
+    <!-- Tabla de Resultados -->
     <section class="tabla-contenedor">
         <table>
             <tr>
@@ -77,24 +87,26 @@ if (isset($_GET['buscar'])) {
             </tr>
 
             <?php
-            if ($resultado !== null) {
-                if ($resultado->num_rows > 0) {
-                    while ($fila = $resultado->fetch_assoc()) {
+            if (!empty($busqueda)) {
+                if (count($filas) > 0) {
+                    foreach ($filas as $fila) {
                         echo "<tr>";
-                        echo "<td>".$fila['id']."</td>";
-                        echo "<td>".$fila['nombre_animal']."</td>";
-                        echo "<td>".$fila['tipo']."</td>";
-                        echo "<td>".$fila['edad']."</td>";
-                        echo "<td>".$fila['color']."</td>";
-                        echo "<td>".$fila['nombre_dueno']."</td>";
-                        echo "<td>".$fila['telefono']."</td>";
-                        echo "<td>".$fila['correo']."</td>";
-                        echo "<td>".$fila['direccion']."</td>";
+                        echo "<td>".htmlspecialchars($fila['id'])."</td>";
+                        echo "<td>".htmlspecialchars($fila['nombre_animal'])."</td>";
+                        echo "<td>".htmlspecialchars($fila['tipo'])."</td>";
+                        echo "<td>".htmlspecialchars($fila['edad'])."</td>";
+                        echo "<td>".htmlspecialchars($fila['color'])."</td>";
+                        echo "<td>".htmlspecialchars($fila['nombre_dueno'])."</td>";
+                        echo "<td>".htmlspecialchars($fila['telefono'])."</td>";
+                        echo "<td>".htmlspecialchars($fila['correo'])."</td>";
+                        echo "<td>".htmlspecialchars($fila['direccion'])."</td>";
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='9'>No se encontraron resultados.</td></tr>";
+                    echo "<tr><td colspan='9'>No se encontraron resultados para '" . htmlspecialchars($busqueda) . "'.</td></tr>";
                 }
+            } else {
+                echo "<tr><td colspan='9'>Ingresa un término para empezar a buscar.</td></tr>";
             }
             ?>
         </table>
