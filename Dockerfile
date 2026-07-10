@@ -1,14 +1,13 @@
-# Usa la imagen oficial de PHP con Apache incorporado
 FROM php:8.2-apache
 
-# Establece el directorio de trabajo dentro del servidor
+# Instalamos las librerías del sistema y el driver de PostgreSQL para PHP
+RUN apt-get update && apt-get install -y libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql
+
 WORKDIR /var/www/html
 
-# Copia todos los archivos del proyecto al servidor
 COPY . .
 
-# Expone el puerto 80 para recibir las visitas de internet
 EXPOSE 80
 
-# Inicia el servidor Apache en primer plano
 CMD ["apache2-foreground"]
