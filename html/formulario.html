@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Animal - Mundo Animal</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="formulario">
+
+    <div class="fondo-bosque"></div>
+
+    <!-- Barra de navegación -->
+    <header class="navbar">
+        <div class="logo">🐾Mundo Animal🐾</div>
+        <nav>
+            <a href="../index.html">Inicio</a>
+            <a href="perros.html">Perros</a>
+            <a href="gatos.html">Gatos</a>
+            <a href="aves.html">Aves</a>
+            <a href="salvajes.html">Salvajes</a>
+            <a href="formulario.html" class="activo">Registrar</a>
+            <a href="../php/ver_animales.php">Ver Animales</a>
+            <a href="../php/buscar.php">Buscar</a>
+        </nav>
+    </header>
+
+    <!-- Título -->
+    <section class="inicio-contenido">
+        <h1 class="titulo-principal">Registrar Animal</h1>
+        <p class="subtitulo">Ingresa los datos del animal y su dueño</p>
+    </section>
+
+    <!-- Formulario -->
+    <section class="formulario-contenedor">
+        <form action="../php/registrar.php" method="POST">
+
+            <div class="columna">
+                <h2>Datos del Animal</h2>
+
+                <label>Nombre del animal:</label>
+                <input type="text" name="nombre_animal" required>
+
+                <label>Tipo de animal:</label>
+                <select name="tipo" id="tipo" required>
+                    <option value="">Seleccione</option>
+                    <option value="Perro">Perro</option>
+                    <option value="Gato">Gato</option>
+                    <option value="Ave">Ave</option>
+                    <option value="Otro">Otro</option>
+                </select>
+
+                <div id="otro_tipo" style="display:none;">
+                    <label>Especifique:</label>
+                    <input type="text" name="otro_tipo">
+                </div>
+
+                <label>Edad:</label>
+                <input type="number" name="edad" min="0" required>
+
+                <label>Color:</label>
+                <input type="text" name="color" required>
+            </div>
+
+            <div class="columna">
+                <h2>Datos del Dueño</h2>
+
+                <label>Nombre del dueño:</label>
+                <input type="text" name="nombre_dueno" required>
+
+                <label>Teléfono:</label>
+                <input type="text" name="telefono" required>
+
+                <label>Correo:</label>
+                <input type="email" name="correo" required>
+
+                <label>Dirección:</label>
+                <input type="text" name="direccion" required>
+            </div>
+
+            <button type="submit" class="btn-registrar">Registrar</button>
+
+        </form>
+    </section>
+
+    <script>
+        // Mostrar campo "otro tipo"
+        document.getElementById("tipo").addEventListener("change", function() {
+            document.getElementById("otro_tipo").style.display =
+                this.value === "Otro" ? "block" : "none";
+        });
+    </script>
+
+    <script src="../js/script.js"></script>
+    
+</body>
+</html>

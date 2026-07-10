@@ -1,0 +1,674 @@
+/* ------------------------------
+   ESTILO GENERAL DEL PROYECTO
+--------------------------------*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    color: #2e3d2f;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Fondo */
+.fondo-bosque {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('imagenes/madera_clara.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.9);
+    z-index: -2;
+}
+
+.fondo-bosque::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(60, 100, 60, 0.25);
+    z-index: -1;
+}
+
+
+/* ------------------------------
+   BARRA DE NAVEGACIÓN MIXTA
+--------------------------------*/
+.navbar {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(3px);
+    border-bottom: 6px solid #3f6b3f;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+}
+
+.logo {
+    font-size: 22px;
+    color: #2f4f2f;
+}
+
+.navbar nav a {
+    margin: 0 12px;
+    text-decoration: none;
+    color: #2f4f2f;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: 0.3s ease;
+    background: rgba(60, 100, 60, 0.15);
+}
+
+.navbar nav a:hover {
+    background: #3f6b3f;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* ------------------------------
+   TARJETAS — FIX DEFINITIVO
+--------------------------------*/
+.contenedor-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    width: 90%;
+    margin: 0 auto 60px auto;
+    padding: 20px 0;
+}
+
+.tarjeta {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    height: auto;
+    box-sizing: border-box;
+}
+
+/* Imágenes — opción B (cover) */
+.tarjeta img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Animación suave */
+.tarjeta {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: aparecer 0.8s ease-out forwards;
+}
+
+.tarjeta:nth-child(1) { animation-delay: 0.1s; }
+.tarjeta:nth-child(2) { animation-delay: 0.2s; }
+.tarjeta:nth-child(3) { animation-delay: 0.3s; }
+.tarjeta:nth-child(4) { animation-delay: 0.4s; }
+.tarjeta:nth-child(5) { animation-delay: 0.5s; }
+.tarjeta:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes aparecer {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tarjeta:hover {
+    transform: scale(1.03);
+    transition: 0.3s ease;
+}
+
+
+/* ------------------------------
+   CONTENIDO DE INICIO
+--------------------------------*/
+.inicio-contenido {
+    text-align: center;
+    margin-top: 120px;
+}
+
+/* Título suave y natural */
+.titulo-principal {
+    font-size: 60px;
+    margin: 0;
+    color: #2f4f2f;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+    font-weight: 700;
+}
+
+/* Subtítulo */
+.subtitulo {
+    font-size: 22px;
+    margin-top: 10px;
+    color: #3f6b3f;
+    font-weight: 500;
+}
+
+/* Caja de introducción con fondo verde suave */
+.intro-caja {
+    width: 60%;
+    margin: 40px auto;
+    background: rgba(60, 100, 60, 0.25);
+    padding: 25px;
+    border-radius: 15px;
+    backdrop-filter: blur(2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    font-size: 18px;
+    line-height: 1.6;
+    color: #2e3d2f;
+}
+
+/* Animación suave */
+.intro-caja:hover {
+    transform: scale(1.02);
+    transition: 0.3s ease;
+}
+
+/* Animación para tarjetas */
+.tarjeta {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: aparecer 0.8s ease-out forwards;
+}
+
+/* Retraso automático para que aparezcan una por una */
+.tarjeta:nth-child(1) { animation-delay: 0.1s; }
+.tarjeta:nth-child(2) { animation-delay: 0.2s; }
+.tarjeta:nth-child(3) { animation-delay: 0.3s; }
+.tarjeta:nth-child(4) { animation-delay: 0.4s; }
+.tarjeta:nth-child(5) { animation-delay: 0.5s; }
+.tarjeta:nth-child(6) { animation-delay: 0.6s; }
+
+/* Keyframes */
+@keyframes aparecer {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tarjeta:hover {
+    transform: scale(1.03);
+    transition: 0.3s ease;
+}
+
+
+/* ------------------------------
+   ESTILO ESPECIAL PARA INICIO
+--------------------------------*/
+body.inicio .titulo-principal {
+    font-size: 55px;
+    color: #2f4f2f;
+}
+
+body.inicio .subtitulo {
+    color: #3f6b3f;
+    font-size: 22px;
+}
+
+body.inicio .titulo-secundario {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 32px;
+    color: #2f4f2f;
+}
+
+body.inicio .tarjeta {
+    background: rgba(228, 248, 216, 0.85);
+}
+/* Botón ver más */
+.btn-ver {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 18px;
+    background: #3f6b3f;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.btn-ver:hover {
+    background: #2f4f2f;
+    transform: scale(1.05);
+}
+
+
+/* ------------------------------
+   ESTILO ESPECIAL PARA PERROS
+--------------------------------*/
+body.perros .titulo-principal {
+    font-size: 50px;
+    color: #5a3e1f;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+}
+
+body.perros .subtitulo{
+    color: #7a5a3f;
+    font-size: 21px;
+}
+
+body.perros .contenedor-tarjetas {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 25px;
+    border-radius: 15px;
+    border: 3px solid rgba(90, 62, 27, 0.4);
+    backdrop-filter: blur(2px);
+}
+
+body.perros .tarjeta {
+    background: rgba(255, 245, 230, 0.85);
+}
+
+/* ------------------------------
+   ESTILO ESPECIAL PARA GATOS
+--------------------------------*/
+body.gatos .titulo-principal {
+    font-size: 50px;
+    color: #3b3a2e;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+}
+
+body.gatos .subtitulo{
+    color: #5c5a45;
+    font-size: 21px;
+}
+
+body.gatos .contenedor-tarjetas {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 25px;
+    border-radius: 15px;
+    border: 3px solid rgba(90, 62, 27, 0.4);
+    backdrop-filter: blur(2px);
+}
+
+body.gatos .tarjeta {
+    background: rgba(255, 245, 230, 0.85);
+}
+
+/* ------------------------------
+   ESTILO ESPECIAL PARA AVES
+--------------------------------*/
+body.aves .titulo-principal {
+    font-size: 50px;
+    color: #2f5f7a;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+}
+
+body.aves .subtitulo{
+    color: #3f7f9a;
+    font-size: 21px;
+}
+
+body.aves .contenedor-tarjetas {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 25px;
+    border-radius: 15px;
+    border: 3px solid rgba(90, 62, 27, 0.4);
+    backdrop-filter: blur(2px);
+}
+
+body.aves .tarjeta {
+    background: rgba(255, 245, 230, 0.85);
+}
+
+/* ------------------------------
+   ESTILO ESPECIAL PARA SALVAJES
+--------------------------------*/
+body.salvajes .titulo-principal{
+    font-size: 50px;
+    color: #7a4a1f;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+body.salvajes .subtitulo{
+    color: #a06b32;
+    font-size: 21px;
+}
+
+body.salvajes .contenedor-tarjetas {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 25px;
+    border-radius: 15px;
+    border: 3px solid rgba(90, 62, 27, 0.4);
+    backdrop-filter: blur(2px);
+}
+
+body.salvajes .tarjeta {
+    background: rgba(255, 245, 230, 0.85);
+}
+
+body.salvajes .texto-grande {
+    font-size: 22px;
+    text-align: center;
+}
+
+
+/* ------------------------------
+   ESTILO ESPECIAL PARA FORMULARIO
+--------------------------------*/
+body.formulario .titulo-principal {
+    font-size: 50px;
+    color: #2f4f2f;
+}
+
+body.formulario .subtitulo {
+    color: #3f6b3f;
+    font-size: 20px;
+}
+
+/* Contenedor del formulario */
+body.formulario .formulario-contenedor {
+    width: 80%;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.75);
+    padding: 30px;
+    border-radius: 15px;
+    border: 3px solid rgba(60, 100, 60, 0.3);
+    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Dos columnas */
+body.formulario form {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+body.formulario .columna {
+    flex: 1;
+    min-width: 280px;
+}
+
+body.formulario h2 {
+    color: #2f4f2f;
+    margin-bottom: 10px;
+}
+
+/* Inputs */
+body.formulario input,
+body.formulario select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 2px solid #3f6b3f;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Botón */
+body.formulario .btn-registrar {
+    width: 100%;
+    padding: 15px;
+    background: #3f6b3f;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s ease;
+}
+
+body.formulario .btn-registrar:hover {
+    background: #2f4f2f;
+    transform: scale(1.03);
+}
+
+
+/* ------------------------------
+   ESTILO ESPECIAL PARA VER ANIMALES
+--------------------------------*/
+body.ver .titulo-principal {
+    font-size: 50px;
+    color: #2f4f2f;
+}
+
+body.ver .subtitulo {
+    color: #3f6b3f;
+    font-size: 20px;
+}
+
+/* Contenedor de la tabla */
+body.ver .tabla-contenedor {
+    width: 90%;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.75);
+    padding: 25px;
+    border-radius: 15px;
+    border: 3px solid rgba(60, 100, 60, 0.3);
+    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Tabla */
+body.ver table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+body.ver th {
+    background: #3f6b3f;
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+body.ver td {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.85);
+    border-bottom: 2px solid rgba(60, 100, 60, 0.2);
+}
+
+body.ver tr:hover td {
+    background: rgba(200, 230, 200, 0.6);
+}
+
+
+/* ------------------------------
+   ESTILO ESPECIAL PARA BUSCAR
+--------------------------------*/
+body.buscar .titulo-principal {
+    font-size: 50px;
+    color: #2f4f2f;
+}
+
+body.buscar .subtitulo {
+    color: #3f6b3f;
+    font-size: 20px;
+}
+
+/* Contenedor del buscador */
+body.buscar .buscar-contenedor {
+    width: 60%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+body.buscar input {
+    width: 70%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 2px solid #3f6b3f;
+    font-size: 16px;
+}
+
+body.buscar button {
+    padding: 12px 20px;
+    background: #3f6b3f;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: 0.3s ease;
+}
+
+body.buscar button:hover {
+    background: #2f4f2f;
+    transform: scale(1.03);
+}
+
+/* Tabla */
+body.buscar .tabla-contenedor {
+    width: 90%;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.75);
+    padding: 25px;
+    border-radius: 15px;
+    border: 3px solid rgba(60, 100, 60, 0.3);
+    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+body.buscar table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+body.buscar th {
+    background: #3f6b3f;
+    color: white;
+    padding: 12px;
+}
+
+body.buscar td {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.85);
+    border-bottom: 2px solid rgba(60, 100, 60, 0.2);
+}
+
+body.buscar tr:hover td {
+    background: rgba(200, 230, 200, 0.6);
+}
+
+
+/* ------------------------------
+   ESTILO ESPECIAL PARA INSECTOS
+--------------------------------*/
+body.insectos .titulo-principal {
+    font-size: 50px;
+    color: #4b7f3b;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+}
+
+body.insectos .subtitulo{
+    color: #5a9c4a;
+    font-size: 21px;
+}
+
+body.insectos .contenedor-tarjetas {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 25px;
+    border-radius: 15px;
+    border: 3px solid rgba(90, 62, 27, 0.4);
+    backdrop-filter: blur(2px);
+}
+
+body.insectos .tarjeta {
+    background: rgba(255, 245, 230, 0.85);
+}
+
+
+/* ------------------------------
+   ESTILO ESPECIAL PARA ANIAMLES DE GRANJA
+--------------------------------*/
+body.granja .titulo-principal {
+    font-size: 50px;
+    color: #6b4f2f;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+}
+
+body.granja .subtitulo{
+    color: #8a6a45;
+    font-size: 21px;
+}
+
+body.granja .contenedor-tarjetas {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 25px;
+    border-radius: 15px;
+    border: 3px solid rgba(90, 62, 27, 0.4);
+    backdrop-filter: blur(2px);
+}
+
+body.granja .tarjeta {
+    background: rgba(255, 245, 230, 0.85);
+}
+
+
+/* ------------------------------
+   ESTILO ESPECIAL PARA ANIMALES EXOTICOS
+--------------------------------*/
+body.exoticos .titulo-principal {
+    font-size: 50px;
+    color: #7a3f8c;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+}
+
+body.exoticos .subtitulo{
+    color: #9b5fb0;
+    font-size: 21px;
+}
+
+body.exoticos .contenedor-tarjetas {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 25px;
+    border-radius: 15px;
+    border: 3px solid rgba(90, 62, 27, 0.4);
+    backdrop-filter: blur(2px);
+}
+
+body.exoticos .tarjeta {
+    background: rgba(255, 245, 230, 0.85);
+}
+
+
+/* ------------------------------
+   ESTILO ESPECIAL PARA ROEDORES
+--------------------------------*/
+body.roedores .titulo-principal {
+    font-size: 50px;
+    color: #8c5f3f;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+}
+
+body.roedores .subtitulo{
+    color: #b47a52;
+    font-size: 21px;
+}
+
+body.roedores .contenedor-tarjetas {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 25px;
+    border-radius: 15px;
+    border: 3px solid rgba(90, 62, 27, 0.4);
+    backdrop-filter: blur(2px);
+}
+
+body.roedores .tarjeta {
+    background: rgba(255, 245, 230, 0.85);
+}
+
+
+@media (max-width: 600px) {
+    .contenedor-tarjetas {
+        grid-template-columns: 1fr;
+        width: 95%;
+    }
+
+    .tarjeta img {
+        height: 180px;
+    }
+}
