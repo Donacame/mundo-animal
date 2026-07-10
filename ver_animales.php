@@ -54,7 +54,7 @@ $resultado = $conexion->query($sql);
             </tr>
 
             <?php
-            if ($resultado->num_rows > 0) {
+            if (count($filas) > 0) {
                 while ($fila = $resultado->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>".$fila['id']."</td>";
