@@ -10,7 +10,6 @@ $conn = pg_connect("host=$host port=$port dbname=$db user=$user password=$pass")
 if (!$conn) {
     die("Error de conexión: " . pg_last_error());
 }
-?>
 
 // Asegurar UTF-8 para acentos y ñ
 $conexion->set_charset("utf8");
