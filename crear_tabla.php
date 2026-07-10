@@ -2,7 +2,6 @@
 include 'conexion.php'; 
 
 try {
-    // Código SQL optimizado para los datos de animal y dueño
     $sql = "CREATE TABLE IF NOT EXISTS registros_animales (
         id SERIAL PRIMARY KEY,
         animal_nombre VARCHAR(100) NOT NULL,
@@ -16,7 +15,8 @@ try {
         fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );";
 
-    $pdo->exec($sql);
+    // Ahora usa $conexion
+    $conexion->exec($sql);
     echo "<h1>¡Éxito!</h1>";
     echo "<p>La tabla <b>registros_animales</b> se ha creado correctamente en Render.</p>";
 } catch (PDOException $e) {
