@@ -21,8 +21,8 @@
             <a href="html/aves.html">Aves</a>
             <a href="html/salvajes.html">Salvajes</a>
             <a href="html/formulario.html">Registrar</a>
-            <a href="php/ver_animales.php">Ver Animales</a>
-            <a href="php/buscar.php">Buscar</a>
+            <a href="ver_animales.php">Ver Animales</a>
+            <a href="buscar.php">Buscar</a>
         </nav>
     </header>
 
